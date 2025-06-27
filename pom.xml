@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.glvov</groupId>
     <artifactId>ai-text-tools-backend</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>ai-text-tools-backend</name>
     <description>ai-text-tools-backend</description>
     <url/>
