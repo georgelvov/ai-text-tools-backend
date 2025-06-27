@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: ai-grammar-backend
+
+gemini:
+  api:
+    key: ${GEMINI_API_KEY}
