@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/grammar")
-@CrossOrigin(origins = "*")
 @Log4j2
 @RequiredArgsConstructor
 public class GrammarController {
@@ -22,6 +21,7 @@ public class GrammarController {
     @PostMapping("/correct")
     @ResponseStatus(HttpStatus.OK)
     public GrammarCorrectionResponse correctGrammar(@Valid @RequestBody GrammarCorrectionRequest request) {
+        log.info("Received grammar correction request");
         return grammarCorrectionService.correctGrammar(request);
     }
-} 
+}

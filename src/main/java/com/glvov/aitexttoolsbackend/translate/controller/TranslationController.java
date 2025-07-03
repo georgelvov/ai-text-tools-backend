@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/translate")
-@CrossOrigin(origins = "*")
 @Log4j2
 @RequiredArgsConstructor
 public class TranslationController {
@@ -25,4 +24,4 @@ public class TranslationController {
         log.info("Received translation request");
         return translationService.translate(request);
     }
-} 
+}

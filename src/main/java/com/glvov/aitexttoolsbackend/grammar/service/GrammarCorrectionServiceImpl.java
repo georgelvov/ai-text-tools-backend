@@ -1,42 +1,41 @@
 package com.glvov.aitexttoolsbackend.grammar.service;
 
-import com.glvov.aitexttoolsbackend.core.AIModel;
-import com.glvov.aitexttoolsbackend.core.config.GeminiConfig;
-import com.glvov.aitexttoolsbackend.core.model.response.GeminiResponse;
+import com.glvov.aitexttoolsbackend.core.GeminiClient;
+import com.glvov.aitexttoolsbackend.core.prompt.PromptService;
 import com.glvov.aitexttoolsbackend.grammar.dto.GrammarCorrectionRequest;
 import com.glvov.aitexttoolsbackend.grammar.dto.GrammarCorrectionResponse;
+import com.google.genai.types.GenerateContentResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
+
+import java.util.Objects;
 
 @Service
-@Profile("default")
+@Profile("!llm-simulated")
 @RequiredArgsConstructor
 @Log4j2
 public class GrammarCorrectionServiceImpl implements GrammarCorrectionService {
 
-    private final WebClient webClient;
-    private final GeminiConfig geminiConfig;
-    private final GeminiRequestFactory geminiRequestFactory;
+    private final GeminiClient geminiClient;
+    private final PromptService promptService;
 
 
     public GrammarCorrectionResponse correctGrammar(GrammarCorrectionRequest request) {
-        log.info("Начинаю исправление грамматики для текста длиной: {} используя модель: {}",
-                request.getText().length(), request.getModel());
+        log.info("Starting grammar correction for text of length: {}", request.text().length());
 
-        GeminiResponse response = webClient.post()
-                .uri(geminiConfig.getApiUrl(AIModel.from(request.getModel())))
-                .bodyValue(geminiRequestFactory.createGeminiRequest(request.getText()))
-                .retrieve()
-                .bodyToMono(GeminiResponse.class)
-                .block();
+        String prompt = promptService.createGrammarCorrectionPrompt(request.text());
 
-        if (response == null || response.getFirstResponseText() == null) {
-            throw new RuntimeException("Пустой ответ от Gemini API");
-        }
+        GenerateContentResponse response = geminiClient.generateContent(request.model().getValue(), prompt);
 
-        return new GrammarCorrectionResponse(response.getFirstResponseText());
+        log.info("Successfully received response ({} chars) from Gemini API",
+                Objects.requireNonNull(response.text()).length());
+
+        GrammarCorrectionResponse grammarCorrectionResponse = new GrammarCorrectionResponse(response.text());
+
+        log.debug("GrammarCorrection response : {}", grammarCorrectionResponse);
+
+        return grammarCorrectionResponse;
     }
 }
