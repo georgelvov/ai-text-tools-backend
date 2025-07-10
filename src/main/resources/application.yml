@@ -12,7 +12,7 @@ management:
   endpoints:
     web:
       exposure:
-       include: loggers
+       include: health, loggers
 
 gemini:
   api:
