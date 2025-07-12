@@ -34,9 +34,9 @@ public class TranslationServiceImpl implements TranslationService {
         log.info("Successfully received response ({} chars) from Gemini API",
                 Objects.requireNonNull(contentResponse.text()).length());
 
-        TranslationResponse translationResponse = translationResponseFactory.createResponse(contentResponse.text());
+        TranslationResponse translationResponse = translationResponseFactory.create(contentResponse.text());
 
-        log.debug("TranslationResponse : {}", translationResponse);
+        log.debug("TranslationResponse: {}", translationResponse);
 
         return translationResponse;
     }

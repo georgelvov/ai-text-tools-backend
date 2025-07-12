@@ -8,8 +8,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum AiModel {
 
-    GEMINI_PRO("gemini-2.5-flash"),
-    GEMMA_7B("gemma-3-27b-it");
+    GEMINI_2_5_FLASH("gemini-2.5-flash"),
+    GEMMA_3_27B_IT("gemma-3-27b-it");
 
     @JsonValue
     private final String value;

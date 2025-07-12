@@ -12,7 +12,7 @@ public class TranslationResponseFactory {
     private static final String UNKNOWN_LANGUAGE = "Unknown";
 
 
-    public TranslationResponse createResponse(String responseText) {
+    public TranslationResponse create(String responseText) {
         if (!StringUtils.hasText(responseText)) {
             log.warn("Received empty response text from API");
             return new TranslationResponse("", UNKNOWN_LANGUAGE);

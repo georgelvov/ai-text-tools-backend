@@ -50,7 +50,7 @@ public class PromptLoader {
         return content.trim();
     }
 
-    public static class PromptLoadException extends RuntimeException {
+    private static class PromptLoadException extends RuntimeException {
         public PromptLoadException(String message, Throwable cause) {
             super(message, cause);
         }

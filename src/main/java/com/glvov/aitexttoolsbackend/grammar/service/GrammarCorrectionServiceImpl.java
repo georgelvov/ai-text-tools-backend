@@ -32,9 +32,9 @@ public class GrammarCorrectionServiceImpl implements GrammarCorrectionService {
         log.info("Successfully received response ({} chars) from Gemini API",
                 Objects.requireNonNull(response.text()).length());
 
-        GrammarCorrectionResponse grammarCorrectionResponse = new GrammarCorrectionResponse(response.text());
+        var grammarCorrectionResponse = new GrammarCorrectionResponse(response.text());
 
-        log.debug("GrammarCorrection response : {}", grammarCorrectionResponse);
+        log.debug("GrammarCorrection response: {}", grammarCorrectionResponse);
 
         return grammarCorrectionResponse;
     }
