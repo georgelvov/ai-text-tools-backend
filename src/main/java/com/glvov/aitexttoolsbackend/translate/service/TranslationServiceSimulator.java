@@ -15,8 +15,11 @@ public class TranslationServiceSimulator implements TranslationService {
     @Override
     @SneakyThrows
     public TranslationResponse translate(TranslationRequest request) {
-        log.info("Translation request to: https://some-llm-api.com");
+        log.info("Translation request for target language: '{}' to  https://some-llm-api.com", request.targetLanguage());
         Thread.sleep(3000);
-        return new TranslationResponse("Dummy language", "Dummy response: " + request.text());
+        return new TranslationResponse(
+                "Dummy language",
+                "Target lang: " + request.targetLanguage() + " / Dummy translate: " + request.text()
+        );
     }
 }

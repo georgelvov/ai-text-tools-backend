@@ -22,6 +22,7 @@ public class GrammarController {
     @ResponseStatus(HttpStatus.OK)
     public GrammarCorrectionResponse correctGrammar(@Valid @RequestBody GrammarCorrectionRequest request) {
         log.info("Received grammar correction request");
+        log.debug("Grammar correction request: {}", request);
         return grammarCorrectionService.correctGrammar(request);
     }
 }

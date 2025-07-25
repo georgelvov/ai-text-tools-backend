@@ -22,6 +22,7 @@ public class TranslationController {
     @ResponseStatus(HttpStatus.OK)
     public TranslationResponse translate(@Valid @RequestBody TranslationRequest request) {
         log.info("Received translation request");
+        log.debug("Translation request: {}", request);
         return translationService.translate(request);
     }
 }

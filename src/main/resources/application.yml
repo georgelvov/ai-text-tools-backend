@@ -1,3 +1,7 @@
+logging:
+  level:
+    com.glvov.aitexttoolsbackend: INFO
+
 spring:
   application:
     name: ai-text-tools-backend
