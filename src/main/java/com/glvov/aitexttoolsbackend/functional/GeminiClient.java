@@ -1,6 +1,6 @@
-package com.glvov.aitexttoolsbackend.core;
+package com.glvov.aitexttoolsbackend.functional;
 
-import com.glvov.aitexttoolsbackend.core.exceptions.GeminiApiException;
+import com.glvov.aitexttoolsbackend.exceptions.GeminiApiException;
 import com.google.genai.Client;
 import com.google.genai.types.GenerateContentResponse;
 import lombok.RequiredArgsConstructor;
